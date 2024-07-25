@@ -44,8 +44,8 @@ class Library:
         if value.id not in self.library:
 
             self.library[value.id] = {
-                'title':value.title,
-                'author':value.author,
+                'title':value.title.strip(),
+                'author':value.author.strip(),
                 'year':value.year,
                 'status':value.status
             }
@@ -71,14 +71,14 @@ class Library:
         
     # Нахождение книги в словаре 
     def search_book(self,title="",author="",year=""):
-        d = list()
-        if title!="" or author!="" or year!="":
+        d = dict()
+        if title.split()!="" or author.split()!="" or year!="":
             for k, v in self.library.items():
                 for kk,vv in v.items():
-                    if title == vv or author ==vv or year == str(vv):
-                        d.append(v)
+                    if title.lower().strip() == vv or author.lower().strip() ==vv or year.strip() == str(vv):
+                        d[k] = v
                         break
-        return d
+        (self.table(d=d) if d else print("Ничего не найдено"))
             
     
     # Изменение статуса книги в словаре 
@@ -91,20 +91,17 @@ class Library:
         else:
             print("Id введен некоректно")
 
-    # Вывести список всех книг
-    def list_book(self):
-        
-        # print("id| title | author | year | status")
-        # for k,v in self.library.items():
-        #     print(f"{k}  | {v["title"]} | {v["author"]} | {v["year"]} | {v["status"]}")
 
-                # Определение ширины колонок
+    def table(self,d = None):
+        
+        library = (self.library if d == None else d)
+            
         column_widths = {
-            'id': max(len("id"), *(len(str(k)) for k in self.library.keys())),
-            'title': max(len("title"), *(len(v['title']) for v in self.library.values())),
-            'author': max(len("author"), *(len(v['author']) for v in self.library.values())),
-            'year': max(len("year"), *(len(str(v['year'])) for v in self.library.values())),
-            'status': max(len("status"), *(len(v['status']) for v in self.library.values()))
+            'id': max(len("id"), *(len(str(k)) for k in library.keys())),
+            'title': max(len("title"), *(len(v['title']) for v in library.values())),
+            'author': max(len("author"), *(len(v['author']) for v in library.values())),
+            'year': max(len("year"), *(len(str(v['year'])) for v in library.values())),
+            'status': max(len("status"), *(len(v['status']) for v in library.values()))
         }
 
         # Форматирование заголовка таблицы
@@ -113,7 +110,11 @@ class Library:
         print("-" * len(header))
 
         # Форматирование строк таблицы
-        for id, book in self.library.items():
+        for id, book in library.items():
             row = f"{id:<{column_widths['id']}} | {book['title']:<{column_widths['title']}} | {book['author']:<{column_widths['author']}} | {book['year']:<{column_widths['year']}} | {book['status']:<{column_widths['status']}}"
             print(row)
+
+    # Вывести список всех книг
+    def list_book(self):
+        self.table()
 

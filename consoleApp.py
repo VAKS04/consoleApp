@@ -104,12 +104,6 @@ class ConsoleApp:
             author=author,
             year=year
         )
-        if l:
-            print("Найденые книги : ")
-            for i in l:
-                print(f"{i['title']}-{i['author']}-{i['year']}-{i['status']}")
-        else: 
-            print('Ничего не найдено')
 
         self.back_to_menu()
 
