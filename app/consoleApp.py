@@ -41,7 +41,6 @@ class ConsoleApp:
             max_key, input_message="Введите номер : ")->None:
         
         while True:
-
             value = int(input(input_message))
 
             if min_key <= value <= max_key:
@@ -62,7 +61,6 @@ class ConsoleApp:
 
         if num == 0:
             os.system('exit')
-
         else:
             self.choose_link(num)
     
@@ -82,7 +80,6 @@ class ConsoleApp:
                        + '(1 - "в наличии", 2 - "выдана"): ')
         
         if (self._library.add_book(title, author, year, status) != True):
-
             print(self.ERROR_MESSAGE)
         
         self.back_to_menu()
@@ -95,7 +92,6 @@ class ConsoleApp:
         num = int(input("Введите id удаляемой книги : "))
 
         if (self._library.delete_book(num) != True):
-
             print(self.ERROR_MESSAGE)
 
         self.back_to_menu()
@@ -123,7 +119,6 @@ class ConsoleApp:
             year=year,
             show=True
         ) != True):
-            
             print("Нет сходства")
 
         self.back_to_menu()
@@ -134,12 +129,10 @@ class ConsoleApp:
         self._library.list_book()
 
         num = int(input("Введите id изменяемой книги : "))
-
         status = int(input("Введите новый статус" 
                            + "(1 - 'в наличии', 2 - 'выдана') : "))
         
         if (self._library.change_books_status(num, status)!=True):
-
             print(self.ERROR_MESSAGE)
 
         self.back_to_menu()

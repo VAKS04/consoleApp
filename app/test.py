@@ -54,7 +54,7 @@ class TestBook(unittest.TestCase):
     def test_del_book(self):
 
         self.assertFalse(self.library.delete_book(-1))
-
+        
         self.assertFalse(self.library.delete_book(0))
 
     def test_search_book(self):
@@ -73,7 +73,6 @@ class TestBook(unittest.TestCase):
             year="2012",
         ))
 
-
     def test_change_status(self):
 
         self.assertFalse(self.library.change_books_status(
@@ -90,5 +89,5 @@ class TestBook(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    
+
     unittest.main()

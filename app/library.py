@@ -13,17 +13,21 @@ class Library:
 
     # Проверка на наличие id книги в словаре
     def check_id(self, id:int):
+        
         if id not in self.library.keys():
             return False
+        
         return True
 
     # Считывание всех данные с файла для последующей индексации  
     def read_books(self):
+
         if os.path.exists(self.filename):
             with open(self.filename, 'r') as f:
                 data = json.load(f)
                 data = {int(k): v for k,v in data.items()}
                 self.library = {**self.library, **data}
+
             if self.library:
                 Book._id_counter = max(self.library.keys()) + 1
 
@@ -36,7 +40,6 @@ class Library:
                              status=status)
         
         if book!=False:
-
             self.library[book.id] = {
                 'title':book.title.strip(),
                 'author':book.author.strip(),
@@ -64,7 +67,6 @@ class Library:
     def delete_book(self, id:int):
 
         if self.check_id(id):
-
             del self.library[id]
 
             self.save_books()
@@ -97,7 +99,6 @@ class Library:
 
         if d:
             if show != False:
-
                 self.table(d=d)
 
             return True
@@ -108,11 +109,9 @@ class Library:
     def change_books_status(self, id:int, new_value:str):
 
         if self.check_id(id):
-
             new_status = Book.status_book(new_value)
 
             if (new_status != False):
-
                 self.library[id]['status'] = new_status
                 
                 self.save_books()
@@ -156,7 +155,6 @@ class Library:
         print("-" * len(header))
         # Форматирование строк таблицы
         for id, book in library.items():
-
             row = (f"{id:<{column_widths['id']}}"
                    + f" | {book['title']:<{column_widths['title']}}"
                    + f" | {book['author']:<{column_widths['author']}}"
