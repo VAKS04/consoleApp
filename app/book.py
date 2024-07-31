@@ -18,6 +18,7 @@ class Book:
 
     @staticmethod
     def status_book(status):
+
         if (int(status)==1):
             return 'в налиии'
         elif (int(status)==2):
@@ -34,7 +35,6 @@ class Book:
             return False
         
         try:
-
             if int(year) > int(datetime.now().year) or int(year) < 0:
                 return False
 

@@ -19,17 +19,20 @@ class Library:
 
     # Считывание всех данные с файла для последующей индексации  
     def read_books(self):
+
         if os.path.exists(self.filename):
+
             with open(self.filename, 'r') as f:
                 data = json.load(f)
                 data = {int(k): v for k,v in data.items()}
                 self.library = {**self.library, **data}
+
             if self.library:
                 Book._id_counter = max(self.library.keys()) + 1
 
     # Добавление книги в файл 
     def add_book(self, title, author, year, status):
-        
+
         book = Book.set_book(title=title,
                              author=author, 
                              year=year, 
@@ -64,7 +67,6 @@ class Library:
     def delete_book(self, id:int):
 
         if self.check_id(id):
-
             del self.library[id]
 
             self.save_books()
@@ -108,11 +110,9 @@ class Library:
     def change_books_status(self, id:int, new_value:str):
 
         if self.check_id(id):
-
             new_status = Book.status_book(new_value)
 
             if (new_status != False):
-
                 self.library[id]['status'] = new_status
                 
                 self.save_books()
