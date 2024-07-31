@@ -23,6 +23,7 @@ class Library:
     def read_books(self):
 
         if os.path.exists(self.filename):
+
             with open(self.filename, 'r') as f:
                 data = json.load(f)
                 data = {int(k): v for k,v in data.items()}
@@ -33,7 +34,7 @@ class Library:
 
     # Добавление книги в файл 
     def add_book(self, title, author, year, status):
-        
+
         book = Book.set_book(title=title,
                              author=author, 
                              year=year, 
@@ -50,7 +51,6 @@ class Library:
             self.save_books()
 
             return True    
-        
         return False
 
     def save_books(self):
@@ -72,7 +72,6 @@ class Library:
             self.save_books()
 
             return True     
-           
         return False
         
 
@@ -102,7 +101,6 @@ class Library:
                 self.table(d=d)
 
             return True
-        
         return False
     
     # Изменение статуса книги в словаре 
@@ -116,8 +114,7 @@ class Library:
                 
                 self.save_books()
 
-                return True 
-                   
+                return True    
         return False
 
 
@@ -165,5 +162,4 @@ class Library:
 
     # Вывести список всех книг
     def list_book(self):
-
         self.table()

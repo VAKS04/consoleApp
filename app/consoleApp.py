@@ -16,7 +16,7 @@ class ConsoleApp:
     ]
 
     def __init__(self) -> None:
-        
+
         self._library = Library()
         self._switch = {
             1:self.add_book_page,
